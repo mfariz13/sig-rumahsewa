@@ -10,10 +10,10 @@ $setDb['db_password']='';
 $template='templates/Admin/';
 
 //session
-$setSession['prefix']='_rumahsewa';
+$setSession['prefix']='_sig-rumahsewa';
 
 //URI
-$setUri['base']='http://localhost/rumahsewa/';
+$setUri['base']='http://localhost/sig-rumahsewa/';
 $setUri['assets']='assets/';
 
 

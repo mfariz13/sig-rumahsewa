@@ -1,4 +1,12 @@
 <?php
+ $setTemplate=true;
+if($setTemplate==True){
+    if($session->get("logged")!==true){
+        redirect(url('login'));
+    }
+}
+?>
+<?php
 $title="Rumah Sewa Sumedang";
 $judul="Rumah sewa Sumedang";
 $url='inputlayer';

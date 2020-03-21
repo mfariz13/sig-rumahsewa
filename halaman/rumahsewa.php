@@ -1,80 +1,152 @@
 <?php
   $title="Rumah Sewa Sumedang";
   $judul="Rumah sewa Sumedang";
+  $url='rumahsewa'
 ?>
-
-
 <section class="content">
 <div class="row">
   <div class="col-sm-8">
     <div class="box">
-      <div class="box-header with-border">
-		<h3 class="box-title">Rumah Sewa Sumedang</h3>
-          <div align="center">
-            <a href="<?=url('rumahsewa')?>"class="btn btn-default"  title="Rumah Sewa Sumedang"><i class="fa fa-home"></i></a>
-            <br><br>
-            <div id="mapid"></div>
-            </div>
-      </div>
+        <div class="box-header with-border">
+		    <h3 class="box-title">Rumah Sewa Sumedang</h3>
+                <div align="center">
+                    <a href="<?=url('rumahsewa')?>"class="btn btn-default"  title="Rumah Sewa Sumedang"><i class="fa fa-home"></i></a>
+                    <a href="<?=url('corona')?>"class="btn btn-default"  title="Penyebaran Corona"><i class="fa fa-map-marker"></i></a>
+                    <br><br>
+                    <div id="mapid"></div>             
+                </div>   
+        </div>
     </div>
   </div>
-  <div class="col-sm-4">
-    <div class="box">
-      <div class="box-header with-border">
-	  <div align="center">
-	  <a class="btn btn-warning btn-lg btn-block" role="button" aria-disabled="true">Hasil</a>
-</div>
-        <table class="table table-bordered">
+<div class="col-sm-4">
+    <section class="panel">
+        <div class="panel-body">
+        <a class="btn btn-warning btn-lg btn-block">Result</a><br> 
+        <div class="md-form mt-0">  
+        
+        <input class="form-control" type="text"id="search-bar"  onkeyup="myFunction()" placeholder="Cari Pemilik Rumah" >
+        </div>
+        <div class="box-body" style="max-height:400px;overflow:auto;">
+        <table class="table table-bordered" id="myTable">
         <thead>
             <tr>
-                <th>No</th>
                 <th>Pemilik Rumah</th>
-				      <th>Alamat</th>
+				<th>Alamat</th>
                 <th>Info</th>
             </tr>
         </thead>
-
     <tbody>
+
+    
         <?php
-            $no=1;
             $getdata=$db->get('data_rumah');
             foreach($getdata as $row){
             ?>
-                <tr>
-                    <td><?=$no?></td>
+                <tr>                   
                     <td><?=$row['nama_rumah']?></td>
-				          	<td><?=$row['alamat']?></td>
+				    <td><?=$row['alamat']?></td>
 					<td>
-					<a href=""class="btn btn-default" > <i class="fa fa-info"></i></a>
-          
-					</td>
-    
+					<a href="<?=url($url.'&info&id='.$row['id_rumah'])?>" name="info" class="btn btn-default"> <i class="fa fa-info"></i></a>
+					</td>		
                 </tr>
                 <?php
-                $no++;
+               
             }
         ?>
+    </tbody>
+</table>
+  </div>
+</div>
+
+</div>
+
+
+<?php
+if(isset($_GET['info'])) {
+$id_rumah="";
+$nama_rumah="";
+$alamat="";
+$GeoJSON="";
+$latitude="";
+$langitude="";
+$img_rumah="";
+$point_marker="";
+
+if(isset($_GET['info']) AND isset ($_GET['id'])){
+    $id=$_GET['id'];
+    $db->where('id_rumah',$id);
+    $row=$db->getOne('data_rumah');
+    if($db->count>0){
+        $id_rumah=$row['id_rumah'];
+        $nama_rumah=$row['nama_rumah'];
+        $alamat=$row['alamat'];
+        $latitude=$row['latitude'];
+        $langitude=$row['langitude'];
+        $img_rumah=$row['img_rumah'];
+
+    }
+}
+?>
+<form method="post" enctype="multipart/form-data">
+<div class="col-sm-8">
+<section class="panel">
+        <div class="panel-body">
+        <a class="btn btn-warning btn-lg btn-block">Result</a>
+        <div class="box-body">
+      <div style="text-align:center;"><?=($row['img_rumah']==''?'-':'<img src="'.assets('unggah/rumah/'.$row['img_rumah']).'"width=500px">')?></div><br>
+
+    
+        <table class="table table-bordered"> 
+    <tbody>
+        
+        <tr>
+            <td>Nama    :</td>
+            <td><?=$row['nama_rumah']?></td>
+        </tr>
+        <tr>
+            <td>Alamat  :</td>
+            <td><?=$row['alamat']?></td>
+        </tr>
+        <tr>
+            <td>Latitude    :</td>
+            <td><?=$row['latitude']?></td>
+        </tr>
+        <tr>
+            <td>Langitude   :</td>
+            <td><?=$row['langitude']?></td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td><?=$row['status']?></td>
+        </tr>
     </tbody>
 </table>
       </div>
   </div>
 </div>
 </div>
+<?php } ?>
+
+</div>
+
+</section>
 
 
-<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+
+
+
+  <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
    crossorigin=""></script>
-
- <script src="assets/js/leaflet-panel-layers-master/src/leaflet-panel-layers.js"></script>
- <script src="assets/js/leaflet.ajax.js"></script>
+  <script src="assets/js/leaflet-panel-layers-master/src/leaflet-panel-layers.js"></script>
+  <script src="assets/js/leaflet.ajax.js"></script>
 
    <script type="text/javascript">
-
    
-   	var map = L.map('mapid').setView([-6.8611192,107.918678], 16);
+    var map = L.map('mapid').setView([-6.8625462,107.9209914], 17);
+    
+    
 
-
-<?php
+   <?php
    $getdata=$db->get('data_rumah');
    $jsonPoint=array();
 	foreach ($getdata as $row) {
@@ -83,8 +155,13 @@
 		$saveJson['properties']=[
                   "name"=>$row['nama_rumah'],
                   "icon"=>($row['point_marker']=='')?assets('icons/marker_home.png'):assets('unggah/marker/'.$row['point_marker']),
-                  "popUp"=>('<img src="'.assets('unggah/rumah/'.$row['img_rumah']).'" width="200px </br></br>"">')."</br>Pemilk Rumah : ".$row['nama_rumah']."<br>Latitude : ".$row['latitude']."<br>Langitude : ".$row['langitude']
-									];
+                  "Popup"=>(' <center>
+                            <img src="'.assets('unggah/rumah/'.$row['img_rumah']).'"width=100%"</br></br>').
+                            "</br>Pemilk Rumah : ".$row['nama_rumah'].
+                            "<br>Alamat : ".$row['alamat'].
+                            '<a href="'.url($url.'&info&id='.$row['id_rumah']).'"" name="info" class="btn btn-default"  > <i class="fa fa-info"></i></a></div>'
+                            
+                                    ];
 		$saveJson['geometry']=[
 									"type" => "Point",
 									"coordinates" => [$row['langitude'],$row['latitude']] 
@@ -92,15 +169,17 @@
 
 		$jsonPoint[]=$saveJson;
 	}
-
 	?>
+  
   var geojsonMarker = <?=json_encode($jsonPoint, JSON_PRETTY_PRINT)?>;
 
   var myIcon = L.Icon.extend({
 	    options: {
-	    	iconSize: [60, 70]
+	    	iconSize: [50, 60]
 	    }
 	});
+
+
   L.geoJSON(geojsonMarker, {
 	    pointToLayer: function (feature, latlng) {
 	        return L.marker(latlng, {
@@ -109,20 +188,20 @@
 	    },
     	onEachFeature: function(feature,layer){
     		 if (feature.properties) {
-		        layer.bindPopup(feature.properties.popUp);
+                layer.bindPopup(feature.properties.Popup);
 		    }
     	}
 	}).addTo(map);
      
-	   L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox/streets-v11',
+    maxZoom: 22,
+    id: 'mapbox/light-v10',
     accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw'
-}).addTo(map);
+    }).addTo(map);
 	
 
-<?php
+        <?php
 		$getLayer=$db->get('geojson');
 		foreach ($getLayer as $row) {
 			$arrayLyr[]='{
@@ -131,7 +210,6 @@
 			}';
 		}
 	?>
-
 	var overLayers = [{
 		group: "Layer",
 		layers: [
@@ -142,9 +220,7 @@
   var panelLayers = new L.Control.PanelLayers(baseLayers, overLayers,{
 		collapsibleGroups: true
 	});
-
 	map.addControl(panelLayers);
 
 
 </script>
-

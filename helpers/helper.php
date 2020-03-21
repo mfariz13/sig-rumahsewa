@@ -21,7 +21,6 @@ function redirect($a=''){
 function templates($a=''){
     return assets($GLOBALS['template'].$a);
 }
-
 function content_open($title=""){
     return '
     <section class="content">

@@ -25,6 +25,8 @@ if(isset($_POST['simpan'])){
         $data['alamat']=$_POST['alamat'];
         $data['latitude']=$_POST['latitude'];
         $data['langitude']=$_POST['langitude'];
+        $data['status']=$_POST['status'];
+
         
 
 
@@ -42,6 +44,7 @@ if(isset($_POST['simpan'])){
         $data['alamat']=$_POST['alamat'];
         $data['latitude']=$_POST['latitude'];
         $data['langitude']=$_POST['langitude'];
+        $data['status']=$_POST['status'];
        
         $db->where('id_rumah',$_POST['id_rumah']);
         $db->update("data_rumah",$data); 
@@ -72,6 +75,7 @@ $alamat="";
 $GeoJSON="";
 $latitude="";
 $langitude="";
+$status="";
 $img_rumah="";
 $point_marker="";
 
@@ -86,6 +90,7 @@ if(isset($_GET['ubah']) AND isset ($_GET['id'])){
         $GeoJSON=$row['GeoJSON'];
         $latitude=$row['latitude'];
         $langitude=$row['langitude'];
+        $status=$row['status'];
         $img_rumah=$row['img_rumah'];
         $point_marker=$row['point_marker'];
     }
@@ -112,6 +117,10 @@ if(isset($_GET['ubah']) AND isset ($_GET['id'])){
     <?=input_text('langitude',$langitude)?>
   </div>
   <div class="form-group">
+    <label>Status</label>
+    <?=input_text('status',$status)?>
+  </div>
+  <div class="form-group">
     <label>Gambar Rumah</label>
     <?=input_file('img_rumah',$img_rumah)?>
   </div>
@@ -125,15 +134,16 @@ if(isset($_GET['ubah']) AND isset ($_GET['id'])){
 <?php } else { ?>
 
 <?=content_open('Data Rumah Sewa')?>
-<a href="<?=url($url.'&tambah')?>" class="btn btn-success">Tambah</a>
+<a href="<?=url($url.'&tambah')?>" class="btn btn-success">Tambah</a><br><br>
     <table class="table table-bordered">
         <thead>
             <tr>
                 <th>No</th>
-                <th>Alamat</th>
                 <th>Nama Pemilik Rumah</th>
+                <th>Alamat</th>
                 <th>Latitude</th>
                 <th>Longitude</th>
+                <th>Status</th>
                 <th>Gambar Rumah</th>
                 <th>Point Marker</th>
                 <th>Option</th>
@@ -151,12 +161,13 @@ if(isset($_GET['ubah']) AND isset ($_GET['id'])){
                     <td><?=$row['nama_rumah']?></td>
                     <td><?=$row['alamat']?></td>
                     <td><?=$row['latitude']?></td>
-                    <td><?=$row['langitude']?></td>  
+                    <td><?=$row['langitude']?></td> 
+                    <td><?=$row['status']?></td>  
                     <td class="text-center"><?=($row['img_rumah']==''?'-':'<img src="'.assets('unggah/rumah/'.$row['img_rumah']).'"width=40px">')?></td>
-                    <td class="text-center"><?=($row['point_marker']==''?'-':'<img src="'.assets('unggah/marker/'.$row['point_marker']).'"width=40px">')?></td>
+                    <td class="text-center"><?=($row['point_marker']==''?'-':'<img src="'.assets('unggah/marker/'.$row['point_marker']).'"width=20px">')?></td>
                     <td>
-                    <a href="<?=url($url.'&ubah&id='.$row['id_rumah'])?>" class="btn btn-info"> <i class="fa fa-edit"></i> Ubah</a>
-                    <a href="<?=url($url.'&hapus&id='.$row['id_rumah'])?>" onclick="return confirm('Apakah anda yakin ingin menghapus data?')" class="btn btn-danger">Hapus</a>
+                    <a href="<?=url($url.'&ubah&id='.$row['id_rumah'])?>" class="btn btn-info"> <i class="fa fa-edit"></i></a>
+                    <a href="<?=url($url.'&hapus&id='.$row['id_rumah'])?>" onclick="return confirm('Apakah anda yakin ingin menghapus data?')" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>
                 <?php
