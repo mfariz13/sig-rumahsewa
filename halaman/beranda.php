@@ -10,7 +10,7 @@
       <div class="box-header with-border">
         <h3 class="box-title">Rumah Sewa Sumedang</h3>
           <div align="center">
-            <a href="<?=url('rumahsewa')?>"class="btn btn-default"  title="Rumah Sewa Sumedang"><i class="fa fa-home"></i></a>
+            <a href="<?=url('tanahsewa')?>"class="btn btn-default"  title="Rumah Sewa Sumedang"><i class="fa fa-home"></i></a>
             <br><br>
               <div id="mapid"></div>
           </div>

@@ -10,7 +10,7 @@
         <div class="box-header with-border">
 		    <h3 class="box-title">Penyebaran Virus Corona</h3>
                 <div align="center">
-                    <a href="<?=url('rumahsewa')?>"class="btn btn-default"  title="Rumah Sewa Sumedang"><i class="fa fa-home"></i></a>
+                    <a href="<?=url('tanahsewa')?>"class="btn btn-default"  title="Rumah Sewa Sumedang"><i class="fa fa-home"></i></a>
                     <a href="<?=url('corona')?>"class="btn btn-default"  title="Corona"><i class="fa fa-map-marker"></i></a>
                     <br><br>
                     <div id="mapid"></div>

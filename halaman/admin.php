@@ -134,7 +134,8 @@ if(isset($_GET['ubah']) AND isset ($_GET['id'])){
 <?php } else { ?>
 
 <?=content_open('Data Rumah Sewa')?>
-<a href="<?=url($url.'&tambah')?>" class="btn btn-success">Tambah</a><br><br>
+
+<a href="<?=url($url.'&tambah')?>" class="btn btn-success btn-lg btn-block">Tambah</a><br>
     <table class="table table-bordered">
         <thead>
             <tr>
