@@ -23,25 +23,22 @@ if(isset($_POST['simpan'])){
     if($_POST['id_rumah']==""){
         $data['nama_rumah']=$_POST['nama_rumah'];
         $data['alamat']=$_POST['alamat'];
+        $data['luas_tanah']=$_POST['luas_tanah'];
         $data['latitude']=$_POST['latitude'];
         $data['langitude']=$_POST['langitude'];
         $data['status']=$_POST['status'];
-
-        
-
-
         $db->insert("data_rumah",$data); 
         ?>  
         <script type="text/javascript">
         window.alert('sukses disimpan');
         window.location.href="<?=url('admin')?>";
         </script>   
-        <?php
-        
+        <?php   
     }
     else {
         $data['nama_rumah']=$_POST['nama_rumah'];
         $data['alamat']=$_POST['alamat'];
+        $data['luas_tanah']=$_POST['luas_tanah'];
         $data['latitude']=$_POST['latitude'];
         $data['langitude']=$_POST['langitude'];
         $data['status']=$_POST['status'];
@@ -72,7 +69,7 @@ if(isset($_GET['tambah']) OR isset($_GET['ubah'])) {
 $id_rumah="";
 $nama_rumah="";
 $alamat="";
-$GeoJSON="";
+$luas_tanah="";
 $latitude="";
 $langitude="";
 $status="";
@@ -87,7 +84,7 @@ if(isset($_GET['ubah']) AND isset ($_GET['id'])){
         $id_rumah=$row['id_rumah'];
         $nama_rumah=$row['nama_rumah'];
         $alamat=$row['alamat'];
-        $GeoJSON=$row['GeoJSON'];
+        $luas_tanah=$row['luas_tanah'];
         $latitude=$row['latitude'];
         $langitude=$row['langitude'];
         $status=$row['status'];
@@ -107,6 +104,10 @@ if(isset($_GET['ubah']) AND isset ($_GET['id'])){
   <div class="form-group">
     <label>Alamat</label>
     <?=input_text('alamat',$alamat)?>
+  </div>
+  <div class="form-group">
+    <label>Luas Tanah</label>
+    <?=input_text('luas_tanah',$luas_tanah)?>
   </div>
   <div class="form-group">
     <label>Latitude</label>
@@ -142,6 +143,7 @@ if(isset($_GET['ubah']) AND isset ($_GET['id'])){
                 <th>No</th>
                 <th>Nama Pemilik Rumah</th>
                 <th>Alamat</th>
+                <th>Luas Tanah</th>
                 <th>Latitude</th>
                 <th>Longitude</th>
                 <th>Status</th>
@@ -161,6 +163,7 @@ if(isset($_GET['ubah']) AND isset ($_GET['id'])){
                     <td><?=$no?></td>
                     <td><?=$row['nama_rumah']?></td>
                     <td><?=$row['alamat']?></td>
+                    <td><?=$row['luas_tanah']?></td>
                     <td><?=$row['latitude']?></td>
                     <td><?=$row['langitude']?></td> 
                     <td><?=$row['status']?></td>  

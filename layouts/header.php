@@ -1,6 +1,6 @@
 <header class="main-header">
     <a href="" class="logo">
-      <span class="logo-mini"><b>A</b>LT</span>
+      
       <span class="logo-lg"><b>WEB</b>GIS</span>
     </a>
     <nav class="navbar navbar-inverse">

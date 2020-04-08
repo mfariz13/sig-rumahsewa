@@ -1,56 +1,58 @@
-<script type="text/javascript">
-   
-    var map = L.map('mapid').setView([-6.8625462,107.9209914], 17);
-    
-    
-    
+<?php
+$setTemplate = false;
+if ($_POST['id']) {
+    $id = $_POST['id'];
+    $db->where('id_rumah', $id);
 
- 
-    <?php
-    $getdata=$db->get('data_rumah');
-   $Marker=array();
-	foreach ($getdata as $row) {
-		$Json=null;
-		$Json['type']="Feature";
-		$Json['properties']=[
-                    "name"=>$row['nama_rumah'],
-                    "icon"=>($row['point_marker']=='')?assets('icons/marker_home.png'):assets('unggah/marker/'.$row['point_marker']),
-                    "Popup"=>('<center>                            
-                            <img src="'.assets('unggah/rumah/'.$row['img_rumah']).'"width=100%"</br></br>').
-                            "</br>Pemilk Rumah : ".$row['nama_rumah'].
-                            "</br>Alamat : ".$row['alamat'].
-                            '</br><a href="'.url($url.'&info&id='.$row['id_rumah']).'"" name="info" class="btn btn-default"  > <i class="fa fa-info"></i></a></div>'                   
-                                    ];
-		$Json['geometry']=[
-									"type" => "Point",
-									"coordinates" => [$row['langitude'],$row['latitude']] 
-									];	
+    echo $db->getLastQuery();
+}
 
-		$Marker[]=$Json;
-    }
-    
-    ?>
-    
-  var geojsonMarker = <?=json_encode($Marker, JSON_PRETTY_PRINT)?>;
- 
-  var myIcon = L.Icon.extend({
-	    options: {
-	    	iconSize: [50, 60]
-	    }
-	});
-    
-  L.geoJSON(geojsonMarker, {
-      
-	    pointToLayer: function (feature, latlng) {
-	        return L.marker(latlng, {
-	        	icon : new myIcon({iconUrl: feature.properties.icon})
-	        });
-	    },
-    	onEachFeature: function(feature,layer){
-    		 if (feature.properties) {
-                layer.bindPopup(feature.properties.Popup);
-		    }
-        }
-    }).addTo(map);
 
-    </script>
+?>
+<?php
+$no = 1;
+$row = $db->getOne('data_rumah');
+if ($db->count > 0) {
+    $id_rumah = $row['id_rumah'];
+    $nama_rumah = $row['nama_rumah'];
+    $alamat = $row['alamat'];
+    $status = $row['status'];
+
+?>
+    <!-- <form method="post"> -->
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <div style="text-align:center;"><?= ($row['img_rumah'] == '' ? '-' : '<img src="' . assets('unggah/rumah/' . $row['img_rumah']) . '"width=80%">') ?></div><br>
+            </tr>
+            <tr>
+                <td>Nama :</td>
+                <td><?= $row['nama_rumah'] ?></td>
+            </tr>
+            <tr>
+                <td>Alamat :</td>
+                <td><?= $row['alamat'] ?></td>
+            </tr>
+            <tr>
+                <td>Status</td>
+                <td><?= $row['status'] ?></td>
+            </tr>
+            <tr>
+                <td>Luas Tanah</td>
+                <td><?= $row['luas_tanah'] ?></td>
+            </tr>
+            <tr>
+                <td>latitur</td>
+                <td><?= $row['latitude'] ?></td>
+            </tr>
+
+            <td>Langitude</td>
+            <td><?= $row['langitude'] ?></td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+
+<?php
+}
+?>
