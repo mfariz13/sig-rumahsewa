@@ -5,6 +5,8 @@
   <title><?=isset($title)?$title:'WebGis PHP'?></title>
   
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
   <link rel="stylesheet" href="<?=templates()?>bower_components/bootstrap/dist/css/bootstrap.min.css">
   
@@ -28,7 +30,8 @@
    
     <style type="text/css">
     #mapid { 
-      height: 70vh;
+      height: 80vh;
+      border: solid #ffff 10px;
       }
     </style>
 </head>

@@ -3,40 +3,78 @@ $title = "Tanah Sewa Yayasan Nazhir Wakaf Pangeran Sumedang";
 $judul = "Tanah Sewa Yayasan Nazhir Wakaf Pangeran Sumedang";
 $url = 'tanahsewa';
 
-$status = (isset($_GET['status'])) ? $_GET['status'] : '';
-if ($status != '') {
-    $db->where('status', '%' . $status . '%', 'LIKE');
-}
 
+$tn_pemilik = "";
+$tn_blok = "";
+$tn_status = "";
+
+$row = $db->getOne('data_rumah');
 ?>
 <section class="content">
     <div class="row">
-        <div class="col-sm-8">
-            <div class="box">
+        <div class="col-md-8">
+            <div class="box ">
                 <div class="box-header with-border">
                     <h3 class="box-title">Tanah Sewa Yayasan Nazhir Wakaf Pangeran Sumedang</h3><br><br>
-                    <div align="center">
-                        <form>
-                            <?= input_hidden('halaman', $url) ?>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="status" id="inlineRadio1" value="">
-                                <label class="form-check-label" for="inlineRadio1">Semua</label>
-                                <input class="form-check-input" type="radio" name="status" id="inlineRadio1" value="Rumah Tinggal">
-                                <label class="form-check-label" for="inlineRadio1">Rumah Tinggal</label>
-                                <input class="form-check-input" type="radio" name="status" id="inlineRadio1" value="Berubah Fungsi">
-                                <label class="form-check-label" for="inlineRadio2">Berubah Fungsi</label>
-                                <button type="submit" value="input" class="btn btn-default"><i class="fa fa-search"></i></button><br><br>
+                    <div style="align:center">
+
+                        <form method="POST" action="">
+                            <?php
+                            if (isset($_POST['filter'])) {
+                                $tn_blok = $_POST['tn_blok'];
+                                $db->where('tn_blok', '%' . $tn_blok . '%', 'LIKE');
+                            } else {
+                                $db->get('data_rumah');
+                                $tn_blok = "";
+                            }
+
+                            if (isset($_POST['filter'])) {
+                                $tn_status = $_POST['tn_status'];
+                                $db->where('tn_status', '%' . $tn_status . '%', 'LIKE');
+                            } else {
+                                $db->get('data_rumah');
+                                $tn_status = "";
+                            }
+                            ?>
+
+                            <div class="form-group col-md-6" style="width:200px">
+
+                                <select name="tn_blok" id="tn_blok" class="form-control">
+                                    <option value="">Pilih Blok</option>
+                                    <option value="">Semua</option>
+                                    <option value="Blok Empang" <?php if ($tn_blok == "Blok Empang") {
+                                                                    echo "selected";
+                                                                } ?>>Blok Empang</option>
+                                    <option value="Blok Babakan" <?php if ($tn_blok == "Blok Babakan") {
+                                                                        echo "selected";
+                                                                    } ?>>Blok Babakan</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6" style="width:200px">
+
+                                <select name="tn_status" id="tn_status" class="form-control">
+                                    <option value="">Cek Status</option>
+                                    <option value="">Semua</option>
+                                    <option value="Rumah Tinggal" <?php if ($tn_status == "Rumah Tinggal") {
+                                                                        echo "selected";
+                                                                    } ?>>Rumah Tinggal</option>
+                                    <option value="Berubah Fungsi" <?php if ($tn_status == "Berubah Fungsi") {
+                                                                        echo "selected";
+                                                                    } ?>>Berubah Fungsi</option>
+                                </select>
+
+                            </div>
+                            <div class="col-md-1">
+                                <button id="filter" name="filter" class="btn btn-warning" value="<?= $filter; ?>">Tampilkan</button>
                             </div>
                         </form>
-
                     </div>
-
-
-                    <div id="mapid"></div>
                 </div>
+                <div id="mapid"></div>
             </div>
+
         </div>
-        <div class="col-sm-4">
+        <div class="col-md-4">
             <section class="panel">
                 <div class="panel-body">
                     <a class="btn btn-warning btn-lg btn-block">Result</a><br>
@@ -44,15 +82,14 @@ if ($status != '') {
                         <?php
                         if (isset($_POST['search'])) {
                             $search = $_POST['search'];
-                            $db->where('nama_rumah', '%' . $search . '%', 'LIKE');
+                            $db->where('tn_pemilik', '%' . $search . '%', 'LIKE');
                         } else {
                             $db->get('data_rumah');
                             $search = "";
                         }
                         ?>
-
-                        <input type="text" class="form-control" name="search" placeholder="nama pemilik tanah" value="<?= $search; ?>">
-                        <button class="btn btn-default">search</button>
+                        <input type="text" class="form-control col-md-8 ml-3 mr-2" name="search" placeholder="nama pemilik tanah" value="<?= $search ?>">
+                        <button class="btn btn-default col-md-2">cari</button>
                     </form>
                     <div class="box-body" style="max-height:400px;overflow:auto;">
                         <table class="table table-bordered" id="myTable">
@@ -60,6 +97,7 @@ if ($status != '') {
                                 <tr>
                                     <th>Pemilik Rumah</th>
                                     <th>Alamat</th>
+
                                     <th>Info</th>
                                 </tr>
                             </thead>
@@ -67,17 +105,22 @@ if ($status != '') {
 
 
                                 <?php
-                                if ($status != '') {
-                                    $db->where('status', '%' . $status . '%', 'LIKE');
+                                if ($tn_status != '') {
+                                    $db->where('tn_status', '%' . $tn_status . '%', 'LIKE');
                                 }
+                                if ($tn_blok != '') {
+                                    $db->where('tn_blok', '%' . $tn_blok . '%', 'LIKE');
+                                }
+
                                 $getdata = $db->get('data_rumah');
                                 foreach ($getdata as $row) {
                                 ?>
                                     <tr>
-                                        <td><?= $row['nama_rumah'] ?></td>
-                                        <td><?= $row['alamat'] ?></td>
+                                        <td><?= $row['tn_pemilik'] ?></td>
+                                        <td><?= $row['tn_almt'] ?></td>
+
                                         <td>
-                                            <a name="info" onClick="markersArray[<?= $row['id_rumah'] ?>].openPopup()" class="btn btn-default"> <i class="fa fa-info"></i></a>
+                                            <a name="info" onClick="markersArray[<?= $row['tn_id'] ?>].openPopup()" class="btn btn-default"> <i class="fa fa-info"></i></a>
                                         </td>
                                     </tr>
                                 <?php
@@ -90,12 +133,12 @@ if ($status != '') {
                 </div>
         </div>
 
-</div>
+    </div>
 
 </section>
 <div class="modal fade" id="infoo" role="dialog">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-content" style="width: 800px">
             <div class="modal-header">
                 <h4 class="modal-title">INFO DETAIL</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -110,31 +153,8 @@ if ($status != '') {
         </div>
     </div>
 </div>
-
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-
-<!-- <div class="modal" id="infoo">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>ini bakal keganti</p>
-            </div>
-            <div class="modal-footer">                
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div> -->
 </div>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script> -->
 
 
 <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==" crossorigin=""></script>
@@ -145,8 +165,18 @@ if ($status != '') {
     var map = L.map('mapid').setView([-6.8625462, 107.9209914], 17);
 
     <?php
-    if ($status != '') {
-        $db->where('status', '%' . $status . '%', 'LIKE');
+    if (isset($_POST['search'])) {
+        $search = $_POST['search'];
+        $db->where('tn_pemilik', '%' . $search . '%', 'LIKE');
+    } else {
+        $db->get('data_rumah');
+        $search = "";
+    }
+    if ($tn_status != '') {
+        $db->where('tn_status', '%' . $tn_status . '%', 'LIKE');
+    }
+    if ($tn_blok != '') {
+        $db->where('tn_blok', '%' . $tn_blok . '%', 'LIKE');
     }
 
 
@@ -157,19 +187,19 @@ if ($status != '') {
         $Json = null;
         $Json['type'] = "Feature";
         $Json['properties'] = [
-            "id" => $row['id_rumah'],
-            "name" => $row['nama_rumah'],
-            "icon" => ($row['point_marker'] == '') ? assets('icons/marker_home.png') : assets('unggah/marker/' . $row['point_marker']),
-            "Popup" => ('<center><img src="' . assets('unggah/rumah/' . $row['img_rumah']) . '"width=100%"</br></br>') .
-                "</br>Pemilk Rumah : " . $row['nama_rumah'] .
-                "</br>Alamat : " . $row['alamat'] .
-                '<br><a  href="" name="infoo" class="btn btn-default"   data-toggle="modal" data-target="#infoo" data-id=' .$row['id_rumah']. '><i class="fa fa-info" ></i> info</a>'
+            "id" => $row['tn_id'],
+            "name" => $row['tn_pemilik'],
+            "icon" => ($row['tn_marker'] == '') ? assets('icons/marker_home.png') : assets('unggah/marker/' . $row['tn_marker']),
+            "Popup" => ('<center><img src="' . assets('unggah/rumah/' . $row['tn_img']) . '"width=100%"</br></br>') .
+                "</br>Pemilk Rumah : " . $row['tn_pemilik'] .
+                "</br>Alamat : " . $row['tn_almt'] .
+                '<br><a  href="" name="infoo" class="btn btn-default"   data-toggle="modal" data-target="#infoo" data-id=' . $row['tn_id'] . '><i class="fa fa-info" ></i> info</a>'
 
         ];
 
         $Json['geometry'] = [
             "type" => "Point",
-            "coordinates" => [$row['langitude'], $row['latitude']]
+            "coordinates" => [$row['tn_lang'], $row['tn_lat']]
         ];
 
         $Marker[] = $Json;

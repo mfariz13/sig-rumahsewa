@@ -9,7 +9,7 @@
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">MAIN NAVIGATION</li>
       <?php
-      if ($session->get("logged") !== true) {
+      if ($session->get('level') == 'User') {
       ?>
         <li>
         </li>
@@ -19,7 +19,7 @@
           </a>
         </li>
       <?php
-      } else {
+      } elseif ($session->get('level') == 'Admin') {
       ?>
         <li>
           <a href="<?= url('admin') ?>">

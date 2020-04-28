@@ -137,81 +137,81 @@ function input_submit($a, $b)
 {
     return '<input type="submit" name="' . $a . '" value="' . $b . '" class="btn btn-info">';
 }
-function select($a, $b = array(), $c = array(), $d = '', $e = '')
-{
-    if(!is_array($d)){
-        $data = '';
-        if (!is_array($c)) {
-            $c = array(
-                $c
-            );
-        }
-        if (count($c) === 0) {
-            if (isset($_POST[$a])) {
-                $c = array(
-                    $_POST[$a]
-                );
-            }
-        }
-        if ($d != '') {
-            $d = ' ' . $d;
-        }
-        if ($e != '') {
-            $e = ' ' . $e;
-        }
-        foreach ($b as $key => $val) {
-            $sel = (in_array($key, $c)) ? ' selected="selected"' : '';
-            $data .= "\t\t\t\t\t\t<option value=\"" . $key . "\"" . $sel . ">" . (string) $val . "</option>\n";
-        }
-        return '<select name="' . $a . '" class="form-control' . $d . '"' . $e . '>' . "\n" . $data . "\t\t\t\t\t" . '</select>' . "\n\t\t\t\t";
-    }
-    else{
-        $set='';
-        foreach ($d as $key => $value) {
-            $set.=' '.$key.'="'.$value.'" ';
-        }
-        $d=$set;
-        $data = '';
-        if (!is_array($c)) {
-            $c = array(
-                $c
-            );
-        }
-        if (count($c) === 0) {
-            if (isset($_POST[$a])) {
-                $c = array(
-                    $_POST[$a]
-                );
-            }
-        }
-        if ($d != '') {
-            $d = ' ' . $d;
-        }
-        if ($e != '') {
-            $e = ' ' . $e;
-        }
-        foreach ($b as $key => $val) {
-            $sel = (in_array($key, $c)) ? ' selected="selected"' : '';
-            $data .= "\t\t\t\t\t\t<option value=\"" . $key . "\"" . $sel . ">" . (string) $val . "</option>\n";
-        }
-        return '<select name="' . $a . '" '. $d . '"' . $e . '>' . "\n" . $data . "\t\t\t\t\t" . '</select>' . "\n\t\t\t\t";
+// function select($a, $b = array(), $c = array(), $d = '', $e = '')
+// {
+//     if(!is_array($d)){
+//         $data = '';
+//         if (!is_array($c)) {
+//             $c = array(
+//                 $c
+//             );
+//         }
+//         if (count($c) === 0) {
+//             if (isset($_POST[$a])) {
+//                 $c = array(
+//                     $_POST[$a]
+//                 );
+//             }
+//         }
+//         if ($d != '') {
+//             $d = ' ' . $d;
+//         }
+//         if ($e != '') {
+//             $e = ' ' . $e;
+//         }
+//         foreach ($b as $key => $val) {
+//             $sel = (in_array($key, $c)) ? ' selected="selected"' : '';
+//             $data .= "\t\t\t\t\t\t<option value=\"" . $key . "\"" . $sel . ">" . (string) $val . "</option>\n";
+//         }
+//         return '<select name="' . $a . '" class="form-control' . $d . '"' . $e . '>' . "\n" . $data . "\t\t\t\t\t" . '</select>' . "\n\t\t\t\t";
+//     }
+//     else{
+//         $set='';
+//         foreach ($d as $key => $value) {
+//             $set.=' '.$key.'="'.$value.'" ';
+//         }
+//         $d=$set;
+//         $data = '';
+//         if (!is_array($c)) {
+//             $c = array(
+//                 $c
+//             );
+//         }
+//         if (count($c) === 0) {
+//             if (isset($_POST[$a])) {
+//                 $c = array(
+//                     $_POST[$a]
+//                 );
+//             }
+//         }
+//         if ($d != '') {
+//             $d = ' ' . $d;
+//         }
+//         if ($e != '') {
+//             $e = ' ' . $e;
+//         }
+//         foreach ($b as $key => $val) {
+//             $sel = (in_array($key, $c)) ? ' selected="selected"' : '';
+//             $data .= "\t\t\t\t\t\t<option value=\"" . $key . "\"" . $sel . ">" . (string) $val . "</option>\n";
+//         }
+//         return '<select name="' . $a . '" '. $d . '"' . $e . '>' . "\n" . $data . "\t\t\t\t\t" . '</select>' . "\n\t\t\t\t";
 
-    }
+//     }
     
-}
-function radio($a, $b, $c = '', $d = '', $e = '')
-{
-    if ($d != '') {
-        $d = ' ' . $d;
-    }
-    if ($e != '') {
-        $e = ' ' . $e;
-    }
-    if ($b == $c) {
-        $c = ' checked="checked" ';
-    }
-    return '<input type="radio" name="' . $a . '" value="' . $b . '" class="' . $d . '"' . $e . '' . $c . '>';
-}
+// }
+// function radio($a, $b, $c = '', $d = '', $e = '')
+// {
+//     if ($d != '') {
+//         $d = ' ' . $d;
+//     }
+//     if ($e != '') {
+//         $e = ' ' . $e;
+//     }
+//     if ($b == $c) {
+//         $c = ' checked="checked" ';
+//     }
+//     return '<input type="radio" name="' . $a . '" value="' . $b . '" class="' . $d . '"' . $e . '' . $c . '>';
+// }
 function checkbox($a, $b, $c = '', $d = '', $e = '')
 {
     if ($d != '') {

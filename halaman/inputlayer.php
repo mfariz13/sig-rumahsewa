@@ -83,7 +83,7 @@ if(isset($_GET['ubah']) AND isset ($_GET['id'])){
 
 
 <?=content_open('Data Rumah Sewa')?>
-<a href="<?=url($url.'&tambah')?>" class="btn btn-success">Tambah</a>
+<a href="<?=url($url.'&tambah')?>" class="btn btn-success btn-lg btn-block">Tambah</a>
     <table class="table table-bordered">
         <thead>
             <tr>

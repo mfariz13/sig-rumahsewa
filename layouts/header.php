@@ -8,7 +8,7 @@
         if($session->get("logged")!==true){
     ?> 
   <div class="container-fluid">
-    <ul class="nav navbar-nav navbar-right">
+    <ul class="nav navbar-nav navbar-right ml-auto">
       <li><a href="<?=url('login')?>"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
     </ul>
   </div>
@@ -17,7 +17,7 @@
   ?>
 
   <div class="container-fluid">
-    <ul class="nav navbar-nav navbar-right">
+    <ul class="nav navbar-nav navbar-right ml-auto">
       <li><a href="<?=url('logout')?>"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
   </div>

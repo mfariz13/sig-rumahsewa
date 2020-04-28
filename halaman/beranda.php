@@ -1,6 +1,8 @@
 <?php
   $title="Rumah Sewa Sumedang";
   $judul="Rumah sewa Sumedang";
+
+
 ?>
 
 <section class="content">
@@ -8,7 +10,7 @@
   <div class="col-sm-8">
     <div class="box">
       <div class="box-header with-border">
-        <h3 class="box-title">Rumah Sewa Sumedang</h3>
+        <h3 class="box-title">Selamat Datang di Yayasan Nazhir Wakaf Pangeran Sumedang</h3><br><br>
           <div align="center">
             <a href="<?=url('tanahsewa')?>"class="btn btn-default"  title="Rumah Sewa Sumedang"><i class="fa fa-home"></i></a>
             <br><br>

@@ -2,7 +2,7 @@
 $setTemplate = false;
 if ($_POST['id']) {
     $id = $_POST['id'];
-    $db->where('id_rumah', $id);
+    $db->where('tn_id', $id);
 
     echo $db->getLastQuery();
 }
@@ -13,41 +13,47 @@ if ($_POST['id']) {
 $no = 1;
 $row = $db->getOne('data_rumah');
 if ($db->count > 0) {
-    $id_rumah = $row['id_rumah'];
-    $nama_rumah = $row['nama_rumah'];
-    $alamat = $row['alamat'];
-    $status = $row['status'];
+    $tn_id = $row['tn_id'];
+    $tn_pemilik = $row['tn_pemilik'];
+    $tn_almt = $row['tn_almt'];
+    $tn_status = $row['tn_status'];
 
 ?>
     <!-- <form method="post"> -->
     <table class="table table-bordered">
         <tbody>
             <tr>
-                <div style="text-align:center;"><?= ($row['img_rumah'] == '' ? '-' : '<img src="' . assets('unggah/rumah/' . $row['img_rumah']) . '"width=80%">') ?></div><br>
+                
+                    <div style="text-align:center;"><?= ($row['tn_img'] == '' ? '-' : '<img src="' . assets('unggah/rumah/' . $row['tn_img']) . '"width=80%">') ?></div><br>
+                
             </tr>
             <tr>
                 <td>Nama :</td>
-                <td><?= $row['nama_rumah'] ?></td>
+                <td><?= $row['tn_pemilik'] ?></td>
             </tr>
             <tr>
-                <td>Alamat :</td>
-                <td><?= $row['alamat'] ?></td>
+                <td>tn_almt :</td>
+                <td><?= $row['tn_almt'] ?></td>
             </tr>
             <tr>
-                <td>Status</td>
-                <td><?= $row['status'] ?></td>
+                <td>tn_status</td>
+                <td><?= $row['tn_status'] ?></td>
             </tr>
             <tr>
                 <td>Luas Tanah</td>
-                <td><?= $row['luas_tanah'] ?></td>
+                <td><?= $row['tn_luas'] ?></td>
             </tr>
             <tr>
-                <td>latitur</td>
-                <td><?= $row['latitude'] ?></td>
+                <td>Blok</td>
+                <td><?= $row['tn_blok'] ?></td>
+            </tr>
+            <tr>
+                <td>tn_lat</td>
+                <td><?= $row['tn_lat'] ?></td>
             </tr>
 
             <td>Langitude</td>
-            <td><?= $row['langitude'] ?></td>
+            <td><?= $row['tn_lang'] ?></td>
             </tr>
         </tbody>
     </table>
