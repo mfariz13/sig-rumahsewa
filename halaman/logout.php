@@ -2,5 +2,5 @@
 $setTemplate=false;
 $session->destroy('_sig-rumahsewa', true);
 
-redirect(url('beranda'));
+redirect(url('tanahsewa'));
 ?>

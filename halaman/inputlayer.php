@@ -1,3 +1,8 @@
+<div class="wrapper">
+<?php
+include 'layouts/sidebar.php';
+?>
+<div class="content-wrapper">
 <?php
  $setTemplate=true;
 if($setTemplate==True){
@@ -65,16 +70,16 @@ if(isset($_GET['ubah']) AND isset ($_GET['id'])){
     }
 }
 ?>
-<?=content_open('Form Rumah Sewa')?>
+<?=content_open('Form Layer')?>
 <form method="post" enctype="multipart/form-data">
-<?=input_hidden('id_layer',$id_layer)?>
+<input type="hidden" name="id_layer" value="<?= $id_layer?>">
 <div class="form-group">
     <label>Nama Layer</label>
-    <?=input_text('nama_layer',$nama_layer)?>
+    <input type="text" name="nama_layer" id="nama_layer" value="<?= $nama_layer ?>"class="form-control" required>
   </div>
   <div class="form-group">
     <label>File GeoJSON</label>
-    <?=input_file('geojson',$geojson)?>
+    <input type="file" name="geojson" id="geojson" value="<?= $geojson?>" class="form-control">
   </div>
   <button type="submit" name="simpan" class="btn btn-info">Simpan</button>
 </form>
@@ -82,8 +87,8 @@ if(isset($_GET['ubah']) AND isset ($_GET['id'])){
 <?php } else { ?>
 
 
-<?=content_open('Data Rumah Sewa')?>
-<a href="<?=url($url.'&tambah')?>" class="btn btn-success btn-lg btn-block">Tambah</a>
+<?=content_open('Data Layer')?>
+<a href="<?=url($url.'&tambah')?>" class="btn btn-success btn-lg btn-block">Tambah</a><br>
     <table class="table table-bordered">
         <thead>
             <tr>

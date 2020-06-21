@@ -6,7 +6,7 @@ $setDb['db_name']='rumahsewa';
 $setDb['db_user']='root';
 $setDb['db_password']='';
 
-// folder templates
+// templates
 $template='templates/Admin/';
 
 //session

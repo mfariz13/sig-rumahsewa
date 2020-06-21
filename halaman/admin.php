@@ -1,4 +1,12 @@
+<div class="wrapper">
 <?php
+include 'layouts/sidebar.php';
+?>
+<div class="content-wrapper">
+<?php
+
+
+
 $setTemplate = true;
 if ($setTemplate == True) {
   if ($session->get("logged") !== true) {
@@ -101,32 +109,33 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
 
   <?= content_open('Form Rumah Sewa') ?>
   <form method="post" enctype="multipart/form-data">
-    <?= input_hidden('tn_id', $tn_id) ?>
+
+    <input type="hidden" name="tn_id" value="<?= $tn_id?>">
     <div class="form-group">
       <label>Nama Pemilik Rumah</label>
-      <?= input_text('tn_pemilik', $tn_pemilik) ?>
+      <input type="text" name="tn_pemilik" id="tn_pemilik" value="<?= $tn_pemilik?>" class="form-control" required>
     </div>
     <div class="form-group">
-      <label>tn_almt</label>
-      <?= input_text('tn_almt', $tn_almt) ?>
+      <label>Alamat</label>
+      <input type="text" name="tn_almt" id="tn_almt" value="<?= $tn_almt ?>"class="form-control" required>
     </div>
     <div class="form-group">
       <label>Luas Tanah</label>
-      <?= input_text('tn_luas', $tn_luas) ?>
+      <input type="text" name="tn_luas" id="tn_luas" value="<?= $tn_luas ?>"class="form-control"required >
     </div>
     <div class="form-group">
-      <label>tn_lat</label>
-      <?= input_text('tn_lat', $tn_lat) ?>
+      <label>Latitude</label>
+      <input type="text" name="tn_lat" id="tn_lat" value="<?= $tn_lat ?>"class="form-control">
     </div>
     <div class="form-group">
-      <label>tn_lang</label>
-      <?= input_text('tn_lang', $tn_lang) ?>
+      <label>Longitude</label>
+      <input type="text" name="tn_lang" id="tn_lang" value="<?= $tn_lang ?>"class="form-control">
     </div>
+    
     <p>
-
-      <label>tn_status : </label>
+      <label>Status : </label>
       <input type="radio" name="tn_status" class="tn_status" value="Rumah Tinggal" <?php if ($row['tn_status'] == 'Rumah Tinggal') echo 'checked' ?>> Rumah Tinggal</label>
-      <input type="radio" name="tn_status" class="tn_status" value="Berubah Fungsi" <?php if ($row['tn_status'] == 'Berubah Fungsi') echo 'checked' ?>> Berubah fungsi</label>
+      <input type="radio" name="tn_status" class="tn_status" value="Tempat Usaha" <?php if ($row['tn_status'] == 'Tempat Usaha') echo 'checked' ?>> Tempat Usaha</label>
     </p>
     <div class="form-control">
     
@@ -138,11 +147,11 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
     </div>
     <div class="form-group">
       <label>Gambar Rumah</label>
-      <?= input_file('tn_img', $tn_img) ?>
+      <input type="file" name="tn_img" id="tn_img" class="form-control">
     </div>
     <div class="form-group">
       <label>Point Marker</label>
-      <?= input_file('tn_marker', $tn_marker) ?>
+      <input type="file" name="tn_marker" id="tn_marker" class="form-control">
     </div>
     <button type="submit" name="simpan" class="btn btn-info">Simpan</button>
   </form>
@@ -199,3 +208,5 @@ if (isset($_GET['tambah']) or isset($_GET['ubah'])) {
   </table>
   <?= content_close() ?>
 <?php } ?>
+    </div>
+  

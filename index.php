@@ -5,7 +5,7 @@
     $halaman=$_GET['halaman'];
   }
   else{
-    $halaman='beranda';
+    $halaman='tanahsewa';
   }
   ob_start();
   $file='halaman/'.$halaman.'.php';
@@ -23,25 +23,17 @@
 <html lang="en">
 <?php include 'layouts/head.php'?>
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
 <?php
   include 'layouts/header.php';
-  include 'layouts/sidebar.php';
 ?>
-
- <div class="content-wrapper">
-
     </section>
   <?php
   echo $content;
   ?>
-     <!-- content -->
-      </div>
 <?php
   include 'layouts/footer.php';
   include 'layouts/javascript.php';
 ?>
-</div>
 </body>
 </html>
 <?php

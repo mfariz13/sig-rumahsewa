@@ -59,7 +59,7 @@
 		foreach ($getLayer as $row) {
 			$arrayLyr[]='{
 			name: "'.$row['nama_layer'].'",
-			layer: new L.GeoJSON.AJAX(["assets/unggah/geojson/'.$row['geojson'].'"],).addTo(map)
+			layer: new L.GeoJSON.AJAX(["assets/unggah/geojson/'.$row['geojson'].'"]).addTo(map)
 			}';
 		}
 	?>
@@ -77,8 +77,5 @@
 	});
 	map.addControl(panelLayers);
   
-
-
-	
 
 </script>

@@ -4,7 +4,6 @@ if ($_POST['id']) {
     $id = $_POST['id'];
     $db->where('tn_id', $id);
 
-    echo $db->getLastQuery();
 }
 
 
@@ -19,24 +18,21 @@ if ($db->count > 0) {
     $tn_status = $row['tn_status'];
 
 ?>
-    <!-- <form method="post"> -->
     <table class="table table-bordered">
         <tbody>
-            <tr>
-                
-                    <div style="text-align:center;"><?= ($row['tn_img'] == '' ? '-' : '<img src="' . assets('unggah/rumah/' . $row['tn_img']) . '"width=80%">') ?></div><br>
-                
+            <tr>              
+                    <div style="text-align:center;"><?= ($row['tn_img'] == '' ? '-' : '<img src="' . assets('unggah/rumah/' . $row['tn_img']) . '"width=60%">') ?></div><br>
             </tr>
             <tr>
                 <td>Nama :</td>
                 <td><?= $row['tn_pemilik'] ?></td>
             </tr>
             <tr>
-                <td>tn_almt :</td>
+                <td>Alamat :</td>
                 <td><?= $row['tn_almt'] ?></td>
             </tr>
             <tr>
-                <td>tn_status</td>
+                <td>Status</td>
                 <td><?= $row['tn_status'] ?></td>
             </tr>
             <tr>
@@ -48,7 +44,7 @@ if ($db->count > 0) {
                 <td><?= $row['tn_blok'] ?></td>
             </tr>
             <tr>
-                <td>tn_lat</td>
+                <td>Latitude</td>
                 <td><?= $row['tn_lat'] ?></td>
             </tr>
 

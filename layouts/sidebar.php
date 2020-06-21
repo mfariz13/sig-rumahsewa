@@ -8,19 +8,7 @@
 
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">MAIN NAVIGATION</li>
-      <?php
-      if ($session->get('level') == 'User') {
-      ?>
-        <li>
-        </li>
-        <li>
-          <a href="<?= url('beranda') ?>">
-            <i class="fa fa-dashboard"></i> <span>Beranda</span>
-          </a>
-        </li>
-      <?php
-      } elseif ($session->get('level') == 'Admin') {
-      ?>
+     
         <li>
           <a href="<?= url('admin') ?>">
             <i class="fa fa-user"></i> <span>Data Rumah Sewa</span>
@@ -31,13 +19,7 @@
             <i class="fa fa-plus"></i> <span>Input Layer</span>
           </a>
         </li>
-        <li>
-          <a href="<?= url('logout') ?>">
-            <i class="fa fa-sign-out"></i> <span>Logout</span>
-          </a>
-        </li>
 
   </section>
-<?php
-      } ?>
+
 </aside>

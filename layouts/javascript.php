@@ -33,32 +33,4 @@ $url='infowindow';
       });
     });
   });
-  // $('#infoo').on('show.bs.modal', function (event) {
-  // var dataVal = $(event.relatedTarget).data('val');
-  // /* var test */;
-  // var $this = $(this);
-	// $.ajax({
-  // type: 'get',
-  // url: 'https://jsonplaceholder.typicode.com/users/' + dataVal,
-  // success: function (data) {
-  // 	console.log(data);
-  //   $this.find(".modal-body").html(`<h1>  ${data.nama_rumah} </h1>`);
-  //   $('.modal-body').append(`<p>id: ${data.id_rumah}</p>
-  //   <p>username: ${data.username}</p>
-  //   <p>email: ${data.email}</p>
-  //   <p>address: ${data.address.street}, ${data.address.suite}, ${data.address.city}</p>`);
-  // }
-  // })
-
- /*  if (!test) {
-    $(this).find(".modal-body").text('loading...');
-  }
-  setTimeout(() => {
-    return $(this).find(".modal-body").text(test.id);
-  }, 100) */
-  
-
-
 </script>
-
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->

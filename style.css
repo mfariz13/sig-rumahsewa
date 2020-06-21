@@ -1,4 +1,16 @@
-
+.login-box-body, .register-box-body {
+  background: #555;
+  padding: 20px;
+  border-top: 0;
+  color: #fff;
+  border-radius: 10px;
+}
+.content{
+  background-color: #ecf0f5 ;
+}
+.main-header{
+  background-color: #f39c12;
+}
 #search-bar {
   background-position: 10px 10px;
   background-repeat: no-repeat;
